@@ -15,17 +15,17 @@
         <span hidden id="od">{{o}}</span>
   	<table style="margin-left:50px;font-size:20px;color:black;" class="table-striped table-bordered table-hover">
         <tr class="sty" style="color:black;padding:10px;">
-           <th style="padding:10px;">Train Number</th>
+           <th  style="padding:10px;">Train Number</th>
             <th style="padding:10px;">Arrival Station</th>
             <th style="padding:10px;">Arrival Time</th>
             <th style="padding:10px;">Select Class</th>
             <th style="padding:10px;">Availibility</th>
-            <th style="padding:10px;">Fare/Seats</th>
+            <th style="padding:10px;">Price</th>
             <th style="padding:10px;">No of Seats</th>
             <th style="padding:10px;">Book</th>
         </tr>
 
-    {% for i in data %}
+
         <tr>
             <td style="padding:15px;"><h5 ><b>{{i.tno}}</b></h5></td>
              <td style="padding:15px;"><h5><b>{{i.sid}}<b/></h5></td>
@@ -40,14 +40,14 @@
                 </select>
             </h6></td>
             <td ><h6 id="{{i.tno}}1"></h6></td>
-            <td><input id="{{i.tno}}p1" type="text" name="price{{i.tno}}" value="" readonly > </h6></td>
+            <td><input id="{{i.tno}}p1" type="text" name="price{{i.tno}}" value=""  > </h6></td>
             <td><input type="number" id="{{i.tno}}-2" name="nos{{i.tno}}"/></td>
             <td>
                 <button type="submit" class="btn btn-success"  value="{{i.tno}}" name="bk">Book Seat</button>
             </td>
         </tr>
 
-    {% endfor %}
+
     </table>
 
         <br/><br/><br/>

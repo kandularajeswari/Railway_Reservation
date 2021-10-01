@@ -7,7 +7,7 @@ urlpatterns = [
     path('logout/',views.logout ),
     path('Reg/',views.Reg,name='Reg'),
     path('search/',views.search),
-    path('search/trains',views.getTrains),
+    path('search/trains/',views.getTrains),
     path('schedule/',views.schedule),
     path('schedule/trains/',views.getTinfo),
     path('addR/',views.addR,name="addR"),

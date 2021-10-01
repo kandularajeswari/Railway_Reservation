@@ -63,7 +63,7 @@ def Reg(request):
             if user is not None:
                 if user.is_active:
                     login(request,user)
-                    return render(request,'home.html')
+                    return render(request,'login.html')
 
             return HttpResponse('<h1>VALID</h1>')
         return HttpResponse(template.render({'form':form},request))
@@ -133,7 +133,7 @@ def addR(request):
             a.ostation=data['ostation']
             a.dstation=data['dstation']
             a.save()
-            return redirect('/home/addR')
+            return redirect('/addR/')
         else:
             return HttpResponse('<h1>Invalid Data</h1>')
 
@@ -156,7 +156,7 @@ def addST(request):
             a.sid = data['sid']
             a.sname = data['sname']
             a.save()
-            return redirect('/home/addST')
+            return redirect('/addST/')
         else:
             return HttpResponse('<h1>Invalid Data</h1>')
 
@@ -173,7 +173,7 @@ def addT(request):
             r1=Route.objects.get(rid=data['rid'])
             a.rid=r1
             a.save()
-            return redirect('/home/addT')
+            return redirect('/addT/')
         else:
             return HttpResponse('<h1>Invalid Data</h1>')
 
@@ -201,7 +201,7 @@ def addRT(request):
             a.order=data['order']
             a.atime=data['atime']
             a.save()
-            return redirect('/home/addRT')
+            return redirect('/addRT/')
         else:
             return HttpResponse(form.errors)
 
@@ -246,6 +246,9 @@ def cva(request):
                 'price': p,
             })
             return HttpResponse(data,content_type='application/json')
+    else:
+        return HttpResponse()
+
 
 def book1(request):
     if(request.method=='POST'):
@@ -256,7 +259,7 @@ def book1(request):
         cls = request.POST['cls'+str(tno)]
         nos=request.POST['nos'+str(tno)]
         pr=request.POST['price'+str(tno)]
-        tname=Trains.objects.get(tno=tno).tname
+        tname=Trains.objects.filter(tno=tno)
         return render(request,'payment.html',{'price':int(pr)*int(nos),'dt':dt,'cls':cls,'tno':tno,'nos':nos,'tname':tname,'src':src,'des':des})
 
 
@@ -266,7 +269,7 @@ def book(request):
         nos=int(request.POST['nos'])
         tno=request.POST['tno']
         dt=request.POST['date']
-        tn1=Trains.objects.get(tno=tno)
+        tn1=Trains.objects.filter(tno=tno)
         cls=request.POST['cls']
         op=request.POST['select']
         tname=request.POST['tname']
@@ -331,7 +334,7 @@ def book(request):
             else:
                 b = Reservation()
                 b.cls = cls
-                b.tno = tn1
+
                 b.status = "C"
                 b.nos = nos
                 b.amt = price
@@ -340,7 +343,7 @@ def book(request):
                 b.pnr = cp + 1
                 b.src=src
                 b.des=des
-                b.save()
+
                 f = 1
         else:
             b = Reservation()
